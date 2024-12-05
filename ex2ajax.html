@@ -1,0 +1,82 @@
+12 h 21
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Étapes XMLHttpRequest</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }        th {
+            background-color: #F4F4F4
+
+;
+        }
+    </style>
+</head><body>
+    <h1>Étapes XMLHttpRequest</h1>
+    <button id="fetch-users">Récupérer les utilisateurs</button>
+    <p id="message"></p>
+    <table >
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+            </tr>
+        </thead>
+        <tbody id="user-table"></tbody>
+    </table>
+    <script>
+        // Sélection des éléments
+        const button = document.getElementById('fetch-users');
+        const message = document.getElementById('message');       // Ajout d'un événement au bouton
+        button.addEventListener('click', () => {
+            // Étape 0 : Création de l'objet XMLHttpRequest
+            const xhr = new XMLHttpRequest();
+            console.log("Initialisation : XMLHttpRequest créé. (readyState = 0)");           // Gestion des changements d'état
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 1) {
+                    console.log("Envoi : La requête a été configurée et envoyée. (readyState = 1)");
+                    message.textContent = "Requête envoyée...";
+                }
+                if (xhr.readyState === 2) {
+                    console.log("Attente : Le serveur a reçu la requête. (readyState = 2)");
+                    message.textContent = "Le serveur traite la demande...";
+                }
+                if (xhr.readyState === 3) {
+                    console.log("Réception : Les données sont en cours de transfert. (readyState = 3)");
+                    message.textContent = "Réception des données...";
+                }
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        console.log("Reçu : Les données ont été récupérées avec succès ! (readyState = 4, status = 200)");
+                        message.textContent = "Données reçues avec succès !";
+                        text = "<tbody'>"
+                          var myObj  = JSON.parse(xhr.responseText) ;
+                        for (x in myObj) {
+                            text += "<tr><td>" + myObj[x].name + "</td><td>"+ myObj[x].email+ "</td><td>"+ myObj[x].phone + "</td></tr>";
+                        }
+                        text += "</tbody>"
+                        document.getElementById("user-table").innerHTML = text;
+                        console.log(JSON.parse(xhr.responseText));
+                    } else {
+                        console.error(`Erreur : Statut ${xhr.status}`);
+                        message.textContent = `Erreur : Impossible de récupérer les données (Statut ${xhr.status})`;
+                    }
+                }
+            };           // Étape 1 : Configuration de la requête
+            xhr.open('GET', 'https://jsonplaceholder.typicode.com/users', true);           // Étape 2 : Envoi de la requête
+            xhr.send();
+        });
+    </script>
+</body></html>
+
+

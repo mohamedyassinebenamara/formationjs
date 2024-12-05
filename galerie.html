@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="block" style="border: 1px solid red; width: 600px; height: 200px;">
+    </div>
+    <script>
+        class galerie {
+            static compteur = 0;
+
+            constructor(conteneur) {
+                this.conteneur = conteneur;
+                this.urlimg = [];
+                galerie.compteur++;
+            }
+
+            ajouterimage(url) {
+
+                this.urlimg.push(url);
+            }
+
+            regnerer() {
+
+                this.conteneur.innerHTML = "";
+                var html = '';
+                
+                for (var i = 0; i < this.urlimg.length; i++) {
+                    html = html + '<img src="' + this.urlimg[i] + '" >;';
+                }
+                this.conteneur.innerHTML = html;
+
+
+            }
+        }
+      
+        const g1 = new galerie(document.getElementById("block"));
+        g1.ajouterimage('tun8.jpg');
+        g1.regenerer();
+    </script>
+</body>
+
+</html>

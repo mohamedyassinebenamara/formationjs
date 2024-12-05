@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="bloc" style="border: 1px solid red; width: 300px; height: 100px;">
+    </div>
+    <script>
+
+class Utilisateur { 
+  static compteur = 0; 
+ 
+  constructor(nom, email) { 
+    this.nom = nom; 
+    this.email = email; 
+    Utilisateur.compteur++; 
+  } 
+ 
+  afficherDetails() { 
+    return `Nom: ${this.nom}, Email: ${this.email}`; 
+  } 
+ 
+  static afficherNombre() { 
+    return `Nombre d'utilisateurs créés : ${Utilisateur.compteur}`; 
+  } 
+}
+        const user1 = new Utilisateur("Alice", "alice@example.com");
+        const user2 = new Utilisateur("Bob", "bob@example.com");
+        console.log(user1.afficherDetails());
+        console.log(Utilisateur.afficherNombre()); 
+
+    </script>
+</body>
+
+</html>

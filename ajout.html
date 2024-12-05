@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Participants</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>exercice tp</h2>
+    <form id="participantForm">
+        Name:<br>
+        <input type="text" id="name" size="19" name="Contact-Name"><br><br>
+        Age:<br>
+        <input type="number" id="age" name="Contact-Age"><br><br>
+        Email:<br>
+        <input type="email" id="email" name="Contact-Email"><br><br>
+        <button type="button" onclick="addParticipant()">Add Participant</button>
+    </form>
+    <h3>Participants List</h3>
+    <table id="participantsTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script>
+        function addParticipant() {
+           
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const email = document.getElementById('email').value;            
+            if (!name || !age || !email) {
+                alert('Please fill out all fields');
+                return;
+            }           
+            const table = document.getElementById('participantsTable').getElementsByTagName('tbody')[0];            // Create a new row
+            const newRow = table.insertRow();           
+            const nameCell = newRow.insertCell(0);
+            const ageCell = newRow.insertCell(1);
+            const emailCell = newRow.insertCell(2);
+            const actionCell = newRow.insertCell(3); nameCell.textContent = name;
+            ageCell.textContent = age;
+            emailCell.textContent = email;           
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.onclick = function () {
+                table.deleteRow(newRow.rowIndex - 1);
+            };
+            actionCell.appendChild(deleteButton);          
+            document.getElementById('participantForm').reset();
+        }
+    </script>
+</body>
+
+</html>
